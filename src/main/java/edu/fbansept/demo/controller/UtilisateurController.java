@@ -2,6 +2,7 @@ package edu.fbansept.demo.controller;
 
 import edu.fbansept.demo.dao.UtilisateurDao;
 import edu.fbansept.demo.model.Utilisateur;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,26 +36,41 @@ public class UtilisateurController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Utilisateur> add(@RequestBody Utilisateur utilisateur) {
+    public ResponseEntity<Utilisateur> add(@RequestBody @Valid Utilisateur utilisateur) {
         utilisateur.setId(null);
         utilisateurDao.save(utilisateur);
         return new ResponseEntity<>(utilisateur, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public boolean update(
+    public ResponseEntity<Utilisateur> update(
             @PathVariable int id,
-            @RequestBody Utilisateur utilisateur) {
-
+            @RequestBody @Valid Utilisateur utilisateur) {
         utilisateur.setId(id);
+
+        Optional<Utilisateur> optionalUtilisateur = utilisateurDao.findById(id);
+
+        if(optionalUtilisateur.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         utilisateurDao.save(utilisateur);
-        return true;
+
+        return new ResponseEntity<>(utilisateur, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable int id) {
+    public ResponseEntity<Utilisateur> delete(@PathVariable int id) {
+
+        Optional<Utilisateur> optionalUtilisateur = utilisateurDao.findById(id);
+
+        if(optionalUtilisateur.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         utilisateurDao.deleteById(id);
-        return true;
+
+        return new ResponseEntity<>(optionalUtilisateur.get(), HttpStatus.OK);
     }
 
 }
