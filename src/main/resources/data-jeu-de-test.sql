@@ -21,3 +21,7 @@ INSERT INTO categorie_quizz (quizz_id, categorie_id) VALUES
 (1, 5),
 (2, 2),
 (2, 4);
+
+INSERT INTO question (texte, quizz_id) VALUES
+("Comment s'appelle le 1er pokemon de sacha", 1),
+("Combien y a t-il de pokemon dans la première génération", 1);

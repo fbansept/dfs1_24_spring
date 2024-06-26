@@ -32,7 +32,7 @@ public class Utilisateur {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     protected String password;
 
-    @OneToMany(mappedBy = "createur")
+    @OneToMany(mappedBy = "createur", fetch = FetchType.EAGER)
     protected List<Quizz> listeQuizz;
 
 
