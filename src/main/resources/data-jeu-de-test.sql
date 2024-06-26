@@ -1,7 +1,7 @@
-INSERT INTO utilisateur (email, password) VALUES
-("a@a.com", "root"),
-("b@b.com", "root"),
-("c@c.com", "root");
+INSERT INTO utilisateur (email, password, administrateur) VALUES
+("a@a.com", "$2a$10$KIp0gvyA4WJO.EtUtJYUr.Dn8oJAZUh7g7FV9.c3uEpV4ozbo5a1e", 1),
+("b@b.com", "$2a$10$KIp0gvyA4WJO.EtUtJYUr.Dn8oJAZUh7g7FV9.c3uEpV4ozbo5a1e", 0),
+("c@c.com", "$2a$10$KIp0gvyA4WJO.EtUtJYUr.Dn8oJAZUh7g7FV9.c3uEpV4ozbo5a1e", 0);
 
 INSERT INTO quizz (nom, niveau, createur_id) VALUES
 ("pokemon", 1, 1),

@@ -35,4 +35,7 @@ public class Utilisateur {
     @OneToMany(mappedBy = "createur")
     protected List<Quizz> listeQuizz;
 
+
+    protected boolean administrateur;
+
 }
